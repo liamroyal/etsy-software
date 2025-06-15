@@ -1,4 +1,4 @@
-# Etsy Dropship Manager
+# Etsy Manager
 
 A React-based application for managing Etsy dropshipping operations.
 
