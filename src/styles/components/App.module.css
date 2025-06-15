@@ -1,0 +1,31 @@
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-primary);
+}
+
+.loadingText {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+}
+
+:global {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-sans);
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    line-height: var(--line-height-normal);
+  }
+  
+  #root {
+    min-height: 100vh;
+  }
+} 

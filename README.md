@@ -1,46 +1,66 @@
-# Getting Started with Create React App
+# Etsy Dropship Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based application for managing Etsy dropshipping operations.
 
-## Available Scripts
+## Setup Instructions
 
-In the project directory, you can run:
+1. Clone the repository
+```bash
+git clone [repository-url]
+cd etsy-dropship-manager
+```
 
-### `npm start`
+2. Install dependencies
+```bash
+npm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3. Configure Firebase
+- Create a new Firebase project at [Firebase Console](https://console.firebase.google.com)
+- Enable Authentication and Firestore in your Firebase project
+- Copy `firebase-config-example.js` to `firebase-config.js`
+- Replace the placeholder values in `firebase-config.js` with your Firebase project credentials
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+4. Start the development server
+```bash
+npm start
+```
 
-### `npm test`
+Or build for production:
+```bash
+npm run build
+npx serve -s build
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+- User authentication with role-based access control
+- Product catalog management
+- Order tracking
+- User management (admin only)
+- Responsive design
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Development
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project follows React best practices as documented in `docs/react-best-practices.md`. Key points:
+- Uses CSS Modules for styling
+- TypeScript for type safety
+- Component-based architecture
+- Custom hooks for business logic
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Testing
 
-### `npm run eject`
+Run the test suite:
+```bash
+npm test
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Contributing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Create a feature branch
+2. Make your changes
+3. Submit a pull request
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Your chosen license]

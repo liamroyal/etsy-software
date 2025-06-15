@@ -1,0 +1,113 @@
+.container {
+  width: 280px;
+  background-color: var(--background-primary);
+  border-right: 1px solid var(--neutral-200);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  padding: var(--spacing-xl);
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  line-height: var(--line-height-tight);
+}
+
+.subtitle {
+  margin: var(--spacing-xs) 0 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  font-family: var(--font-family-sans);
+}
+
+.userInfo {
+  padding: var(--spacing-xl);
+  border-bottom: 1px solid var(--neutral-200);
+  background-color: var(--background-secondary);
+}
+
+.userEmail {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+}
+
+.roleBadge {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  margin-top: var(--spacing-sm);
+  display: inline-block;
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.roleBadgeAdmin {
+  composes: roleBadge;
+  background-color: var(--primary-100);
+  color: var(--primary-700);
+}
+
+.roleBadgeUser {
+  composes: roleBadge;
+  background-color: var(--neutral-100);
+  color: var(--neutral-700);
+}
+
+.nav {
+  flex: 1;
+  padding: var(--spacing-lg) 0;
+  overflow-y: auto;
+}
+
+.footer {
+  padding: var(--spacing-xl);
+  border-top: 1px solid var(--neutral-200);
+}
+
+.tab {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-family-sans);
+  transition: var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.tabActive {
+  composes: tab;
+  background-color: var(--primary-50);
+  color: var(--primary-700);
+  font-weight: var(--font-weight-medium);
+  border-left: 3px solid var(--primary-600);
+}
+
+.tabHovered {
+  composes: tab;
+  background-color: var(--neutral-50);
+}
+
+.tabIcon {
+  font-size: var(--font-size-lg);
+} 
