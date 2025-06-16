@@ -20,7 +20,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
   const { currentUser, logout } = useAuth();
-  const permissions = usePermissions();
+  // const permissions = usePermissions();
 
   const navigationItems: NavigationItem[] = [
     {

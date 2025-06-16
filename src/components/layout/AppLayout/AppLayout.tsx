@@ -3,7 +3,7 @@ import { Sidebar } from '../Sidebar/Sidebar';
 import { PageType } from '../../../types/navigation';
 import { MainContent } from '../MainContent/MainContent';
 import Dashboard from '../../../pages/Dashboard';
-import ProductCatalog from '../../../pages/ProductCatalog';
+import { ProductCatalog } from '../../products/ProductCatalog/ProductCatalog';
 import UserManagement from '../../../pages/UserManagement';
 
 interface AppLayoutProps {
