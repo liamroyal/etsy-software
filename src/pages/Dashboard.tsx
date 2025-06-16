@@ -147,25 +147,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onPageChange }) => {
         </p>
       </div>
 
-      {/* Stats Grid */}
-      <div style={dashboardStyles.statsGrid}>
-        {stats.map((stat) => (
-          <div
-            key={stat.id}
-            style={{
-              ...dashboardStyles.statCard,
-              ...(hoveredCard === stat.id ? dashboardStyles.statCardHover : {})
-            }}
-            onMouseEnter={() => setHoveredCard(stat.id)}
-            onMouseLeave={() => setHoveredCard(null)}
-          >
-            <div style={dashboardStyles.statIcon}>{stat.icon}</div>
-            <h3 style={dashboardStyles.statValue}>{stat.value}</h3>
-            <p style={dashboardStyles.statLabel}>{stat.label}</p>
-          </div>
-        ))}
-      </div>
-
       {/* Quick Actions */}
       <div style={dashboardStyles.actionsSection}>
         <h2 style={dashboardStyles.sectionTitle}>Quick Actions</h2>

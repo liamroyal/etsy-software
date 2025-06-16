@@ -80,21 +80,6 @@ const loginStyles = {
   },
   buttonContainer: {
     marginTop: theme.spacing.md
-  },
-  testAccounts: {
-    marginTop: '30px',
-    padding: '15px',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '4px',
-    fontSize: '12px',
-    color: '#666'
-  },
-  testTitle: {
-    margin: '0 0 10px 0',
-    fontWeight: 'bold' as const
-  },
-  testAccount: {
-    margin: '5px 0'
   }
 };
 
@@ -135,7 +120,7 @@ export const LoginForm: React.FC = () => {
     <div style={loginStyles.container}>
       <div style={loginStyles.card}>
         <div style={loginStyles.header}>
-          <h1 style={loginStyles.title}>🏪 Etsy Dropship Manager</h1>
+          <h1 style={loginStyles.title}>🏪 Royal Commerce Etsy Management Software</h1>
           <p style={loginStyles.subtitle}>Sign in to your account</p>
         </div>
 
@@ -194,12 +179,6 @@ export const LoginForm: React.FC = () => {
             </Button>
           </div>
         </form>
-        
-        <div style={loginStyles.testAccounts}>
-          <p style={loginStyles.testTitle}>Test Accounts:</p>
-          <p style={loginStyles.testAccount}>Admin: admin@test.com / 123456</p>
-          <p style={loginStyles.testAccount}>User: user@test.com / 123456</p>
-        </div>
       </div>
     </div>
   );
