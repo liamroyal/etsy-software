@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
@@ -8,13 +8,13 @@ const firebaseConfig = {
   apiKey: "AIzaSyCYYGe1euqblOd_2d67TWFBnxAcbXwDDBE",
   authDomain: "etsy-dropship-manager.firebaseapp.com",
   projectId: "etsy-dropship-manager",
-  storageBucket: "etsy-dropship-manager.firebasestorage.app",
+  storageBucket: "etsy-dropship-manager.appspot.com",
   messagingSenderId: "723951081534",
   appId: "1:723951081534:web:00f94d4442f5dcd75a996f"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 // Initialize Firestore
 export const db = getFirestore(app);

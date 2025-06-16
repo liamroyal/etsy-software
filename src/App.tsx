@@ -9,6 +9,7 @@ import { ProductCatalog } from './components/products/ProductCatalog/ProductCata
 import UserManagement from './pages/UserManagement';
 import { TrackingUploader } from './components/features/TrackingUploader';
 import { TrackingDatabase } from './components/features/TrackingDatabase/TrackingDatabase';
+import { Notes } from './components/features/Notes/Notes';
 import styles from './styles/components/App.module.css';
 import { PageType } from './types/navigation';
 
@@ -33,7 +34,8 @@ const AppContent: React.FC = () => {
       'products': '/products',
       'users': '/users',
       'tracking': '/tracking',
-      'tracking-database': '/tracking-database'
+      'tracking-database': '/tracking-database',
+      'notes': '/notes'
     };
     navigate(routeMap[page]);
   };
@@ -46,6 +48,7 @@ const AppContent: React.FC = () => {
         <Route path="/users" element={<UserManagement />} />
         <Route path="/tracking" element={<TrackingUploader />} />
         <Route path="/tracking-database" element={<TrackingDatabase />} />
+        <Route path="/notes" element={<Notes />} />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </AppLayout>

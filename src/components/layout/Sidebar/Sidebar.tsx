@@ -51,6 +51,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) =
       id: 'tracking-database',
       label: 'Tracking Database',
       icon: '🔍'
+    },
+    {
+      id: 'notes',
+      label: 'Notes/Todo',
+      icon: '📝'
     }
   ];
 

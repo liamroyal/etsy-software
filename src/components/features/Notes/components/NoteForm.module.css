@@ -1,0 +1,79 @@
+.form {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--neutral-200);
+  margin-bottom: 2rem;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.inputGroup:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.titleInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--neutral-300);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.titleInput:focus {
+  outline: none;
+  border-color: var(--primary-400);
+  box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+.bodyInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--neutral-300);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: white;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.bodyInput:focus {
+  outline: none;
+  border-color: var(--primary-400);
+  box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+.submitButton {
+  background-color: var(--primary-600);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: var(--primary-700);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.titleInput::placeholder,
+.bodyInput::placeholder {
+  color: var(--text-tertiary);
+} 
