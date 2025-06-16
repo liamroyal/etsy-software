@@ -31,7 +31,7 @@ const Home: React.FC = () => {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <h1 style={{ margin: 0 }}>Etsy Dropshipping Manager</h1>
+        <h1 style={{ margin: 0 }}>Royal Commerce Etsy Management Software</h1>
         <button 
           onClick={handleLogout}
           style={{

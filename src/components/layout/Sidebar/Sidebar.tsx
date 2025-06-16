@@ -1,16 +1,17 @@
 import React from 'react';
 import { useAuth } from '../../../context/AuthContext';
-import { PermissionGate } from '../../common/AccessControl/PermissionGate';
 import { usePermissions } from '../../../hooks/usePermissions';
 import { Button } from '../../common/Button/Button';
-import styles from '../../../styles/components/Sidebar.module.css';
+import { PermissionGate } from '../../common/AccessControl/PermissionGate';
+import styles from './Sidebar.module.css';
 import { PageType } from '../../../types/navigation';
 
 interface NavigationItem {
   id: PageType;
   label: string;
   icon: string;
-  permission: 'view_dashboard' | 'view_products' | 'manage_users';
+  permission?: 'view_dashboard' | 'view_products' | 'manage_users';
+  adminOnly?: boolean;
 }
 
 interface SidebarProps {
@@ -20,7 +21,6 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
   const { currentUser, logout } = useAuth();
-  // const permissions = usePermissions();
 
   const navigationItems: NavigationItem[] = [
     {
@@ -40,6 +40,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) =
       label: 'User Management',
       icon: '👥',
       permission: 'manage_users'
+    },
+    {
+      id: 'tracking',
+      label: 'Tracking Upload',
+      icon: '📦',
+      adminOnly: true
+    },
+    {
+      id: 'tracking-database',
+      label: 'Tracking Database',
+      icon: '🔍'
     }
   ];
 
@@ -47,30 +58,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) =
     try {
       await logout();
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error('Failed to logout:', error);
     }
   };
 
   return (
-    <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        <h3 className={styles.title}>🏪 Etsy Dropship</h3>
-        <p className={styles.subtitle}>Manager</p>
+    <aside className={styles.sidebar}>
+      <div className={styles.brand}>
+        <h1 className={styles.title}>Royal Commerce</h1>
+        <p className={styles.subtitle}>Etsy Management Platform</p>
       </div>
-
-      {/* User Info */}
-      <div className={styles.userInfo}>
-        <p className={styles.userEmail}>{currentUser?.email}</p>
-        <span className={currentUser?.role === 'admin' ? styles.roleBadgeAdmin : styles.roleBadgeUser}>
-          {currentUser?.role}
-        </span>
-      </div>
-
-      {/* Navigation */}
+      
       <nav className={styles.nav}>
         {navigationItems.map((item) => (
-          <PermissionGate key={item.id} permission={item.permission}>
+          <PermissionGate 
+            key={item.id} 
+            permission={item.permission}
+            adminOnly={item.adminOnly}
+          >
             <SidebarTab
               item={item}
               isActive={currentPage === item.id}
@@ -80,18 +85,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) =
         ))}
       </nav>
 
-      {/* Logout */}
-      <div className={styles.footer}>
-        <Button 
-          variant="ghost" 
-          size="md" 
-          fullWidth 
-          onClick={handleLogout}
-        >
-          Sign Out
-        </Button>
-      </div>
-    </div>
+      {currentUser && (
+        <div className={styles.userSection}>
+          <div className={styles.userInfo}>
+            <span className={styles.userName}>{currentUser.email}</span>
+          </div>
+          <button 
+            className={styles.logoutButton}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
+      )}
+    </aside>
   );
 };
 

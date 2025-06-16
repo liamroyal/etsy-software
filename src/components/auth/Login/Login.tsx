@@ -31,7 +31,7 @@ export const Login: React.FC<LoginProps> = () => {
     <div className={styles.container}>
       <div className={styles.formCard}>
         <div className={styles.header}>
-          <h2 className={styles.title}>🏪 Etsy Dropship Manager</h2>
+          <h2 className={styles.title}>🏪 Royal Commerce - Etsy Management Software</h2>
           <p className={styles.subtitle}>Sign in to your account</p>
         </div>
 
