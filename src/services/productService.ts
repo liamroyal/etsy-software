@@ -50,15 +50,12 @@ export const productService = {
       
       // If searching, filter products in memory for more flexible matching
       if (filters?.search && filters.search.trim()) {
-        const searchTerms = filters.search.toLowerCase().split(/\s+/);
         return products.filter(product => {
           const searchableText = [
             product.name,
             product.fulfillmentMethod
           ].join(' ').toLowerCase();
-          
-          // All search terms must match somewhere in the searchable text
-          return searchTerms.every(term => searchableText.includes(term));
+          return searchableText.includes(filters.search.toLowerCase());
         });
       }
       

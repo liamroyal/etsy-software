@@ -1,12 +1,15 @@
 export interface Product {
   id: string;
   name: string;
+  description: string;
   price: number;
+  imageUrl: string;
+  category: string;
+  listingLink?: string;
+  fulfillmentLink?: string;
+  fulfillmentMethod?: string;
   photoUrl: string;
   photoPublicId: string; // Cloudinary public ID
-  fulfillmentLink: string;
-  listingLink: string;
-  fulfillmentMethod: string;
   createdAt: string;
   updatedAt: string;
 }

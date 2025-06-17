@@ -30,8 +30,26 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       initialValue: initialProduct?.name || '',
       rules: [
         {
-          validate: (value) => value.length > 0,
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
           message: 'Name is required'
+        }
+      ]
+    },
+    description: {
+      initialValue: initialProduct?.description || '',
+      rules: [
+        {
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
+          message: 'Description is required'
+        }
+      ]
+    },
+    category: {
+      initialValue: initialProduct?.category || '',
+      rules: [
+        {
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
+          message: 'Category is required'
         }
       ]
     },
@@ -39,17 +57,21 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       initialValue: initialProduct?.price || 0,
       rules: [
         {
-          validate: (value) => value > 0,
+          validate: (value: number) => value > 0,
           message: 'Price must be greater than 0'
         }
       ],
       transform: (value) => Number(value)
     },
+    imageUrl: {
+      initialValue: initialProduct?.imageUrl || '',
+      rules: []
+    },
     fulfillmentLink: {
       initialValue: initialProduct?.fulfillmentLink || '',
       rules: [
         {
-          validate: (value) => value.length > 0,
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
           message: 'Fulfillment link is required'
         }
       ]
@@ -58,7 +80,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       initialValue: initialProduct?.listingLink || '',
       rules: [
         {
-          validate: (value) => value.length > 0,
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
           message: 'Listing link is required'
         }
       ]
@@ -67,7 +89,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       initialValue: initialProduct?.fulfillmentMethod || '',
       rules: [
         {
-          validate: (value) => value.length > 0,
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
           message: 'Fulfillment method is required'
         }
       ]
@@ -84,6 +106,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           const uploadResult = await uploadImage(selectedFile);
           photoUrl = uploadResult.url;
           photoPublicId = uploadResult.publicId;
+          data.imageUrl = photoUrl; // Set the main product image URL
         }
 
         if (!photoUrl || !photoPublicId) {
@@ -145,6 +168,29 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           value={values.name}
           onChange={(e) => handleChange('name', e.target.value)}
           error={errors.name}
+          required
+        />
+      </div>
+
+      <div className={styles.field}>
+        <Input
+          label="Description"
+          name="description"
+          value={values.description}
+          onChange={(e) => handleChange('description', e.target.value)}
+          error={errors.description}
+          type="textarea"
+          required
+        />
+      </div>
+
+      <div className={styles.field}>
+        <Input
+          label="Category"
+          name="category"
+          value={values.category}
+          onChange={(e) => handleChange('category', e.target.value)}
+          error={errors.category}
           required
         />
       </div>
