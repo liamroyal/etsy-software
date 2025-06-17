@@ -1,204 +1,346 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Product, ProductFilters } from '../../../types/product';
 import { productService } from '../../../services/productService';
-import { Input } from '../../common/Input';
-import { Button } from '../../common/Button';
+import { Input } from '../../common/Input/Input';
+import { Button } from '../../common/Button/Button';
 import { ProductForm } from '../ProductForm/ProductForm';
 import { usePermissions } from '../../../hooks/usePermissions';
 import { useDebounce } from '../../../hooks/useDebounce';
 import styles from './ProductCatalog.module.css';
+import styled from 'styled-components';
+import { theme } from '../../../styles/theme';
 
-export const ProductCatalog: React.FC = () => {
-  const { canEditProducts } = usePermissions();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isAddingProduct, setIsAddingProduct] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const debouncedSearchTerm = useDebounce(searchTerm, 300);
-  const [filters, setFilters] = useState<ProductFilters>({
-    search: '',
-    fulfillmentMethod: undefined,
-    minPrice: undefined,
-    maxPrice: undefined
-  });
+interface ProductCatalogProps {
+  products?: Product[];
+  loading?: boolean;
+  onDelete?: (productId: string) => void;
+  onEdit?: (product: Product) => void;
+  onAdd?: () => void;
+  onSearch?: (term: string) => void;
+}
 
-  const loadProducts = useCallback(async (searchValue: string) => {
-    try {
-      setLoading(true);
-      const data = await productService.getProducts({
-        ...filters,
-        search: searchValue
-      });
-      setProducts(data);
-      setError(null);
-    } catch (err) {
-      setError('Failed to load products');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [filters]);
+const Container = styled.div`
+  padding: ${theme.spacing.lg};
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 
-  // Effect for search term changes
-  useEffect(() => {
-    loadProducts(debouncedSearchTerm);
-  }, [debouncedSearchTerm, loadProducts]);
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.md};
+  }
+`;
 
-  // Effect for other filter changes
-  useEffect(() => {
-    if (!searchTerm) {
-      loadProducts('');
-    }
-  }, [filters, loadProducts, searchTerm]);
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${theme.spacing.xl};
+  gap: ${theme.spacing.md};
 
-  const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`;
 
-  const handleDelete = async (id: string) => {
-    if (!window.confirm('Are you sure you want to delete this product?')) return;
-    
-    try {
-      await productService.deleteProduct(id);
-      setProducts(products.filter(p => p.id !== id));
-    } catch (err) {
-      setError('Failed to delete product');
-      console.error(err);
-    }
-  };
+const SearchBar = styled.div`
+  flex: 1;
+  max-width: 400px;
 
-  const handleAddSuccess = () => {
-    setIsAddingProduct(false);
-    loadProducts(searchTerm);
-  };
+  @media (max-width: 768px) {
+    max-width: none;
+  }
+`;
 
-  const handleEditSuccess = () => {
-    setEditingProduct(null);
-    loadProducts(searchTerm);
-  };
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.sm};
+`;
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+const Th = styled.th`
+  text-align: left;
+  padding: ${theme.spacing.md};
+  border-bottom: 1px solid ${theme.colors.neutral[200]};
+  background: ${theme.colors.neutral[50]};
+  white-space: nowrap;
 
-  if (isAddingProduct || editingProduct) {
+  &:first-child {
+    border-top-left-radius: ${theme.borderRadius.lg};
+  }
+
+  &:last-child {
+    border-top-right-radius: ${theme.borderRadius.lg};
+  }
+
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.sm};
+    font-size: ${theme.typography.fontSize.sm};
+  }
+`;
+
+const Td = styled.td`
+  padding: ${theme.spacing.md};
+  border-bottom: 1px solid ${theme.colors.neutral[200]};
+  vertical-align: middle;
+
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.sm};
+    font-size: ${theme.typography.fontSize.sm};
+  }
+`;
+
+const ProductImage = styled.img`
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: ${theme.borderRadius.md};
+  background-color: ${theme.colors.neutral[100]};
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
+const ImageContainer = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: ${theme.borderRadius.md};
+  background-color: ${theme.colors.neutral[100]};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
+const ImageFallback = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${theme.colors.neutral[100]};
+  color: ${theme.colors.neutral[400]};
+  font-size: ${theme.typography.fontSize.sm};
+`;
+
+interface ProductImageWithFallbackProps {
+  src: string;
+  alt: string;
+}
+
+const ProductImageWithFallback: React.FC<ProductImageWithFallbackProps> = ({ src, alt }) => {
+  const [hasError, setHasError] = useState(false);
+
+  if (!src || hasError) {
     return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h2>{editingProduct ? 'Edit Product' : 'Add New Product'}</h2>
-          <Button
-            variant="secondary"
-            onClick={() => editingProduct ? setEditingProduct(null) : setIsAddingProduct(false)}
-          >
-            Cancel
-          </Button>
-        </div>
-        <ProductForm
-          initialProduct={editingProduct || undefined}
-          onSuccess={editingProduct ? handleEditSuccess : handleAddSuccess}
-          onCancel={() => editingProduct ? setEditingProduct(null) : setIsAddingProduct(false)}
-        />
-      </div>
+      <ImageContainer>
+        <ImageFallback>
+          📷
+        </ImageFallback>
+      </ImageContainer>
     );
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.searchBar}>
+    <ImageContainer>
+      <ProductImage
+        src={src}
+        alt={alt}
+        onError={() => setHasError(true)}
+      />
+    </ImageContainer>
+  );
+};
+
+const Price = styled.span`
+  font-weight: ${theme.typography.fontWeight.medium};
+  color: ${theme.colors.text.primary};
+`;
+
+const ActionButtons = styled.div`
+  display: flex;
+  gap: ${theme.spacing.sm};
+  justify-content: flex-end;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    
+    > button {
+      padding: ${theme.spacing.xs} ${theme.spacing.sm};
+      font-size: ${theme.typography.fontSize.xs};
+    }
+  }
+`;
+
+const Links = styled.div`
+  display: flex;
+  gap: ${theme.spacing.sm};
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: ${theme.spacing.xs};
+  }
+`;
+
+export const ProductCatalog: React.FC<ProductCatalogProps> = ({ 
+  products = [], 
+  loading = false,
+  onDelete,
+  onEdit,
+  onAdd,
+  onSearch
+}) => {
+  const { canEditProducts } = usePermissions();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  console.log('ProductCatalog props:', { products, loading });
+
+  if (loading) {
+    return <div>Loading products...</div>;
+  }
+
+  const dummyProducts: Product[] = [
+    {
+      id: '1',
+      name: 'Leather Backpack',
+      description: 'High-quality leather backpack',
+      price: 91.55,
+      imageUrl: 'https://via.placeholder.com/300x200',
+      category: 'Accessories',
+      photoUrl: 'https://via.placeholder.com/60',
+      photoPublicId: 'dummy-1',
+      listingLink: 'https://etsy.com/listing/123',
+      fulfillmentLink: 'https://supplier.com/product/123',
+      fulfillmentMethod: 'Dropship',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    },
+    {
+      id: '2',
+      name: 'Scented Candle',
+      description: 'Handmade scented candle',
+      price: 17.20,
+      imageUrl: 'https://via.placeholder.com/300x200',
+      category: 'Home & Living',
+      photoUrl: 'https://via.placeholder.com/60',
+      photoPublicId: 'dummy-2',
+      listingLink: 'https://etsy.com/listing/456',
+      fulfillmentLink: 'https://supplier.com/product/456',
+      fulfillmentMethod: 'Dropship',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }
+  ];
+
+  const displayProducts = products.length > 0 ? products : dummyProducts;
+  console.log('Display products:', displayProducts);
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    onSearch?.(term);
+  };
+
+  return (
+    <Container>
+      <Header>
+        <SearchBar>
           <Input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
-            onChange={e => handleSearch(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)}
+            fullWidth
           />
-        </div>
+        </SearchBar>
         {canEditProducts && (
           <Button
             variant="primary"
-            onClick={() => setIsAddingProduct(true)}
+            onClick={onAdd}
           >
             Add Product
           </Button>
         )}
-      </div>
+      </Header>
 
-      <table className={styles.table}>
+      <Table>
         <thead>
           <tr>
-            <th className={styles.headerCell}>Photo</th>
-            <th className={styles.headerCell}>Name</th>
-            <th className={styles.headerCell}>Price</th>
-            <th className={styles.headerCell}>Fulfillment Method</th>
-            <th className={styles.headerCell}>Links</th>
-            <th className={styles.headerCell}>Actions</th>
+            <Th>Photo</Th>
+            <Th>Name</Th>
+            <Th>Price</Th>
+            <Th>Links</Th>
+            {canEditProducts && <Th>Actions</Th>}
           </tr>
         </thead>
         <tbody>
-          {products.map(product => (
-            <tr key={product.id} className={styles.row}>
-              <td className={styles.cell}>
-                <img 
-                  src={product.photoUrl} 
-                  alt={product.name} 
-                  className={styles.photo}
-                />
-              </td>
-              <td className={styles.cell}>
-                <span className={styles.productName}>{product.name}</span>
-              </td>
-              <td className={styles.cell}>
-                <span className={styles.price}>${product.price.toFixed(2)}</span>
-              </td>
-              <td className={styles.cell}>
-                <span className={styles.method}>{product.fulfillmentMethod}</span>
-              </td>
-              <td className={styles.cell}>
-                <div className={styles.links}>
-                  <a 
-                    href={product.listingLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={styles.link}
+          {displayProducts.map(product => (
+            <tr key={product.id}>
+              <Td>
+                <ProductImageWithFallback src={product.photoUrl} alt={product.name} />
+              </Td>
+              <Td>
+                <span style={{ 
+                  fontWeight: 500,
+                  color: theme.colors.text.primary,
+                  display: 'block'
+                }}>
+                  {product.name}
+                </span>
+              </Td>
+              <Td>
+                <Price>${product.price.toFixed(2)}</Price>
+              </Td>
+              <Td>
+                <Links>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => window.open(product.listingLink, '_blank')}
                   >
                     Listing
-                  </a>
-                  {' | '}
-                  <a 
-                    href={product.fulfillmentLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={styles.link}
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => window.open(product.fulfillmentLink, '_blank')}
                   >
                     Fulfillment
-                  </a>
-                </div>
-              </td>
-              <td className={styles.cell}>
-                {canEditProducts && (
-                  <div className={styles.actions}>
-                    <Button 
-                      variant="secondary" 
-                      size="sm" 
-                      onClick={() => setEditingProduct(product)}
+                  </Button>
+                </Links>
+              </Td>
+              {canEditProducts && (
+                <Td>
+                  <ActionButtons>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => onEdit?.(product)}
                     >
                       Edit
                     </Button>
-                    <Button 
-                      variant="danger" 
-                      size="sm" 
-                      onClick={() => handleDelete(product.id)}
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => onDelete?.(product.id)}
                     >
                       Delete
                     </Button>
-                  </div>
-                )}
-              </td>
+                  </ActionButtons>
+                </Td>
+              )}
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </Container>
   );
 }; 
