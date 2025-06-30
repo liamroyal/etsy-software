@@ -1,13 +1,13 @@
 export interface Product {
   id: string;
   name: string;
-  description: string;
   price: number;
+  currency: string; // 'USD', 'AUD', 'NZD'
   imageUrl: string;
-  category: string;
   listingLink?: string;
   fulfillmentLink?: string;
   fulfillmentMethod?: string;
+  store: string;
   photoUrl: string;
   photoPublicId: string; // Cloudinary public ID
   createdAt: string;
