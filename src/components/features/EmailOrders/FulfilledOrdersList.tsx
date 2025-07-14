@@ -328,7 +328,7 @@ export const FulfilledOrdersList: React.FC<FulfilledOrdersListProps> = ({
               </div>
               <div className={styles.cell}>
                 <span className={getRevenueClassName(order)}>
-                  ${parseFloat(String(order.amountAUD || 0)).toFixed(2)}
+                                          ${(order.amountAUD || 0).toFixed(2)}
                 </span>
               </div>
               <div className={styles.cell}>

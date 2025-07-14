@@ -20,8 +20,8 @@ export const OrderRow: React.FC<OrderRowProps> = ({ order, onClick, onStatusUpda
     }
   };
 
-  // Convert amountAUD from string to number for display
-  const amountAUD = parseFloat(order.amountAUD || '0');
+  // amountAUD is already a number, ensure it has a fallback value
+  const amountAUD = order.amountAUD || 0;
 
   // Determine the appropriate CSS class based on order state
   const getOrderRowClass = () => {

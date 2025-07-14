@@ -83,7 +83,7 @@ export const RefundModal: React.FC<RefundModalProps> = ({
   };
 
   const calculateRefundAmount = () => {
-    const originalAmount = parseFloat(order.amountAUD || '0');
+    const originalAmount = order.amountAUD || 0;
     const refundAmount = (originalAmount * formData.refundPercentage) / 100;
     return refundAmount.toFixed(2);
   };
