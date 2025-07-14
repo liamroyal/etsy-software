@@ -1,0 +1,468 @@
+.container {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  margin: 0 0 var(--spacing-lg) 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: center;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: var(--spacing-md);
+}
+
+/* Key Metrics - Main Display */
+.keyMetrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+.metricCard {
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.metricCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transition: all 0.3s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Revenue Card Styling */
+.revenueCard {
+  background: linear-gradient(135deg, #f8f9ff, #e3f2fd);
+  border-color: #2196f3;
+}
+
+.revenueCard::before {
+  background: linear-gradient(90deg, #2196f3, #1976d2);
+}
+
+.revenueCard:hover {
+  border-color: #1976d2;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+/* Profit Card Styling */
+.profitCard {
+  background: linear-gradient(135deg, #f1f8e9, #e8f5e8);
+  border-color: #4caf50;
+}
+
+.profitCard::before {
+  background: linear-gradient(90deg, #4caf50, #388e3c);
+}
+
+.profitCard:hover {
+  border-color: #388e3c;
+  background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+}
+
+/* Loss Card Styling */
+.lossCard {
+  background: linear-gradient(135deg, #fff3e0, #ffebee);
+  border-color: #f44336;
+}
+
+.lossCard::before {
+  background: linear-gradient(90deg, #f44336, #d32f2f);
+}
+
+.lossCard:hover {
+  border-color: #d32f2f;
+  background: linear-gradient(135deg, #ffebee, #ffcdd2);
+}
+
+.metricLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.metricValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.1;
+}
+
+/* Revenue Value Styling */
+.revenueValue {
+  color: #1976d2;
+}
+
+.metricSubtext {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.profitPositive {
+  color: #2e7d32 !important;
+}
+
+.profitNegative {
+  color: #d32f2f !important;
+}
+
+/* Expand Button */
+.expandButton {
+  width: 100%;
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.expandButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.expandButton:hover::before {
+  left: 100%;
+}
+
+.expandButton:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.expandButton:active {
+  transform: translateY(0);
+}
+
+.expandButtonActive {
+  background: linear-gradient(135deg, #007bff, #0056b3) !important;
+  color: white !important;
+}
+
+.expandButtonActive:hover {
+  background: linear-gradient(135deg, #0056b3, #004085) !important;
+}
+
+.expandIcon {
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.expandButtonActive .expandIcon {
+  transform: rotate(180deg);
+}
+
+.expandText {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* Detailed Breakdown Container */
+.detailedBreakdown {
+  animation: expandIn 0.3s ease-out;
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+    transform: translateY(0);
+  }
+}
+
+/* Table Container */
+.tableContainer {
+  overflow-x: auto;
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+/* Table Headers */
+.table thead th {
+  background: linear-gradient(135deg, #495057, #343a40);
+  color: white;
+  font-weight: 600;
+  padding: var(--spacing-md);
+  text-align: left;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.descriptionHeader {
+  width: 45%;
+}
+
+.amountHeader {
+  width: 25%;
+  text-align: right;
+}
+
+.runningTotalHeader {
+  width: 30%;
+  text-align: right;
+}
+
+/* Table Rows */
+.table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Row Types */
+.revenueRow {
+  background: rgba(33, 150, 243, 0.06);
+}
+
+.deductionRow {
+  background: rgba(255, 152, 0, 0.06);
+}
+
+.subtotalRow {
+  background: rgba(33, 150, 243, 0.1);
+  font-weight: 600;
+  border-top: 2px solid #2196f3;
+  border-bottom: 2px solid #2196f3;
+}
+
+.totalRow {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.12), rgba(76, 175, 80, 0.06));
+  font-weight: 700;
+  border-top: 3px solid #4caf50;
+  font-size: 1.05rem;
+}
+
+/* Table Cells */
+.table td {
+  padding: var(--spacing-md);
+  vertical-align: top;
+}
+
+.description {
+  color: var(--color-text-primary);
+}
+
+.descriptionContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.mainLabel {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+}
+
+.subLabel {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.amount {
+  text-align: right;
+  font-weight: 600;
+}
+
+.runningTotal {
+  text-align: right;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* Amount Types */
+.positiveAmount {
+  color: #2e7d32;
+  font-weight: 700;
+}
+
+.negativeAmount {
+  color: #d32f2f;
+  font-weight: 700;
+}
+
+.subtotalAmount {
+  color: #1976d2;
+  font-weight: 700;
+}
+
+.finalAmount {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+  }
+  
+  .title {
+    font-size: 1.1rem;
+  }
+  
+  .keyMetrics {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .metricCard {
+    padding: var(--spacing-lg);
+  }
+  
+  .metricValue {
+    font-size: 2rem;
+  }
+  
+  .metricLabel {
+    font-size: 0.9rem;
+  }
+  
+  .expandButton {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+  
+  .table thead th {
+    padding: var(--spacing-sm);
+    font-size: 0.8rem;
+  }
+  
+  .table td {
+    padding: var(--spacing-sm);
+  }
+  
+  .descriptionContent {
+    gap: var(--spacing-xxs);
+  }
+  
+  .mainLabel {
+    font-size: 0.9rem;
+  }
+  
+  .subLabel {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .tableContainer {
+    overflow-x: scroll;
+  }
+  
+  .table {
+    min-width: 500px;
+  }
+  
+  .descriptionHeader {
+    width: 50%;
+  }
+  
+  .amountHeader,
+  .runningTotalHeader {
+    width: 25%;
+  }
+  
+  .metricValue {
+    font-size: 1.8rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: var(--color-surface-dark);
+    border-color: var(--color-border-dark);
+  }
+  
+  .revenueCard {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.05));
+    border-color: #42a5f5;
+  }
+  
+  .profitCard {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+    border-color: #66bb6a;
+  }
+  
+  .lossCard {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.05));
+    border-color: #ef5350;
+  }
+  
+  .table {
+    background: var(--color-surface-dark);
+  }
+  
+  .table tbody tr:hover {
+    background-color: var(--color-background-dark);
+  }
+} 

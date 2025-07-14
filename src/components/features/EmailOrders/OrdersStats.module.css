@@ -1,0 +1,80 @@
+/* OrdersStats.module.css */
+
+.container {
+  margin-bottom: var(--spacing-lg);
+}
+
+.statsRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-md) 0;
+}
+
+.statItem {
+  text-align: right;
+}
+
+.statLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-xs);
+  line-height: 1;
+}
+
+.statValue {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* Loading State */
+.loadingState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--neutral-200);
+  border-top: 2px solid var(--primary-500);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .statsRow {
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+  }
+  
+  .statValue {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsRow {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+  }
+} 

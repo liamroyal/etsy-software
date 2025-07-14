@@ -35,24 +35,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         }
       ]
     },
-    description: {
-      initialValue: initialProduct?.description || '',
-      rules: [
-        {
-          validate: (value: string | undefined) => Boolean(value && value.length > 0),
-          message: 'Description is required'
-        }
-      ]
-    },
-    category: {
-      initialValue: initialProduct?.category || '',
-      rules: [
-        {
-          validate: (value: string | undefined) => Boolean(value && value.length > 0),
-          message: 'Category is required'
-        }
-      ]
-    },
     price: {
       initialValue: initialProduct?.price || 0,
       rules: [
@@ -62,6 +44,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         }
       ],
       transform: (value) => Number(value)
+    },
+    currency: {
+      initialValue: initialProduct?.currency || 'USD',
+      rules: [
+        {
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
+          message: 'Currency is required'
+        }
+      ]
     },
     imageUrl: {
       initialValue: initialProduct?.imageUrl || '',
@@ -91,6 +82,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         {
           validate: (value: string | undefined) => Boolean(value && value.length > 0),
           message: 'Fulfillment method is required'
+        }
+      ]
+    },
+    store: {
+      initialValue: initialProduct?.store || '',
+      rules: [
+        {
+          validate: (value: string | undefined) => Boolean(value && value.length > 0),
+          message: 'Store name is required'
         }
       ]
     }
@@ -174,23 +174,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
       <div className={styles.field}>
         <Input
-          label="Description"
-          name="description"
-          value={values.description}
-          onChange={(e) => handleChange('description', e.target.value)}
-          error={errors.description}
-          type="textarea"
-          required
-        />
-      </div>
-
-      <div className={styles.field}>
-        <Input
-          label="Category"
-          name="category"
-          value={values.category}
-          onChange={(e) => handleChange('category', e.target.value)}
-          error={errors.category}
+          label="Store"
+          name="store"
+          value={values.store}
+          onChange={(e) => handleChange('store', e.target.value)}
+          error={errors.store}
+          placeholder="Enter store name"
           required
         />
       </div>
@@ -205,6 +194,23 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           error={errors.price}
           required
         />
+      </div>
+
+      <div className={styles.field}>
+        <label htmlFor="currency" className={styles.label}>Currency</label>
+        <select
+          id="currency"
+          name="currency"
+          value={values.currency}
+          onChange={e => handleChange('currency', e.target.value)}
+          className={styles.input}
+          required
+        >
+          <option value="USD">USD ($)</option>
+          <option value="AUD">AUD (A$)</option>
+          <option value="NZD">NZD (NZ$)</option>
+        </select>
+        {errors.currency && <span className={styles.error}>{errors.currency}</span>}
       </div>
 
       <div className={styles.field}>
@@ -276,7 +282,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           variant="primary"
           disabled={isSubmitting || isUploading}
         >
-          {isSubmitting || isUploading ? 'Saving...' : (initialProduct ? 'Update Product' : 'Add Product')}
+          {isSubmitting || isUploading ? 'Saving...' : initialProduct ? 'Update Product' : 'Add Product'}
         </Button>
       </div>
     </form>

@@ -1,0 +1,196 @@
+/* EmailOrdersList.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 500px; /* Fixed height for better UX */
+  margin-bottom: var(--spacing-xl);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.orderCount {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  background-color: #e5e7eb;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1.5fr;
+  gap: 12px;
+  padding: 10px 16px;
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.headerCell {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.ordersContainer {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+/* Scrollbar Styling */
+.ordersContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ordersContainer::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.ordersContainer::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.ordersContainer::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Loading States */
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl);
+  text-align: center;
+  min-height: 200px;
+}
+
+.loadingSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingText {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.errorText {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #dc2626;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.emptyText {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.errorIcon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.errorDetails {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.emptySubtext {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  max-width: 300px;
+  line-height: 1.5;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    height: 400px;
+  }
+  
+  .header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .headerRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px 20px;
+  }
+  
+  .headerCell:nth-child(2) {
+    display: none;
+  }
+  
+  .title {
+    font-size: 16px;
+  }
+  
+  .orderCount {
+    font-size: 12px;
+  }
+} 

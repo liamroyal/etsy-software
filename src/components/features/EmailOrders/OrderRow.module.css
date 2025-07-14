@@ -1,0 +1,289 @@
+/* OrderRow.module.css */
+
+.orderRow {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1fr;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  align-items: center;
+  position: relative;
+  border-left: 4px solid transparent;
+  cursor: default;
+  min-height: 56px;
+}
+
+.orderRow:hover {
+  background: #f9fafb;
+}
+
+.orderRow:last-child {
+  border-bottom: none;
+}
+
+.orderRow[role="button"] {
+  cursor: pointer;
+}
+
+.orderRow[role="button"]:hover {
+  background: #f3f4f6;
+  transform: translateX(1px);
+}
+
+/* Pending orders - amber/orange styling */
+.orderRowPending {
+  border-left-color: #f59e0b;
+  background-color: #fffbeb;
+}
+
+.orderRowPending:hover {
+  background-color: #fef3c7;
+}
+
+.orderRowPending[role="button"]:hover {
+  background-color: #fed7aa;
+}
+
+/* Fulfilled orders - green styling */
+.orderRowFulfilled {
+  border-left-color: #10b981;
+  background-color: #f0fdf4;
+}
+
+.orderRowFulfilled:hover {
+  background-color: #dcfce7;
+}
+
+.orderRowFulfilled[role="button"]:hover {
+  background-color: #bbf7d0;
+}
+
+/* Old/overdue orders - red warning styling */
+.orderRowOld {
+  border-left-color: #ef4444;
+  background-color: #fef2f2;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.1);
+}
+
+.orderRowOld:hover {
+  background-color: #fee2e2;
+}
+
+.orderRowOld[role="button"]:hover {
+  background-color: #fecaca;
+}
+
+/* Overdue orders - red styling */
+.orderRowOverdue {
+  border-left-color: #ef4444;
+  background-color: #fef2f2;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.1);
+}
+
+.orderRowOverdue:hover {
+  background-color: #fee2e2;
+}
+
+.orderRowOverdue[role="button"]:hover {
+  background-color: #fecaca;
+}
+
+/* Refund orders - red styling */
+.orderRowRefund {
+  background-color: #fef7f7;
+  border-left-color: #ef4444;
+}
+
+.orderRowRefund:hover {
+  background-color: #fef2f2;
+}
+
+/* Order Details Column */
+.orderDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.orderNumber {
+  font-weight: 600;
+  color: #111827;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+}
+
+.orderDate {
+  font-size: 12px;
+  color: #6b7280;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.refundReason {
+  font-size: 11px;
+  color: #dc2626;
+  font-style: italic;
+  background: #fef2f2;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border-left: 2px solid #fecaca;
+}
+
+/* Store & Customer Column */
+.storeCustomer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.storeName {
+  font-weight: 500;
+  color: #111827;
+  font-size: 14px;
+}
+
+.customerName {
+  font-size: 12px;
+  color: #6b7280;
+  word-break: break-word;
+}
+
+/* Amount Column */
+.amount {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.primaryAmount {
+  font-weight: 600;
+  color: #16a34a;
+  font-size: 14px;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+.refundAmount {
+  font-weight: 600;
+  color: #dc2626;
+  font-size: 14px;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+.originalAmount,
+.convertedAmount {
+  font-size: 11px;
+  color: #6b7280;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* Status Column */
+.status {
+  display: flex;
+  justify-content: center;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.statusIcon {
+  font-size: 12px;
+}
+
+.statusText {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Status Variants */
+.statusPending {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+.statusFulfilled {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.statusRefund {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.statusOverdue {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #ef4444;
+}
+
+.orderType {
+  font-size: 10px;
+  color: #6b7280;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .orderRow {
+    grid-template-columns: 2fr 1.5fr 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+  
+  .storeCustomer {
+    display: none;
+  }
+  
+  .amount {
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .orderRowPending[role="button"]:hover,
+  .orderRowFulfilled[role="button"]:hover,
+  .orderRowOld[role="button"]:hover,
+  .orderRowRefund[role="button"]:hover {
+    padding-left: calc(var(--spacing-md) - 4px);
+  }
+  
+  .orderNumber {
+    font-size: var(--font-size-xs);
+  }
+  
+  .primaryAmount,
+  .refundAmount {
+    font-size: var(--font-size-xs);
+  }
+  
+  .statusBadge {
+    padding: var(--spacing-xs);
+  }
+  
+  .statusText {
+    display: none;
+  }
+  
+  .orderType {
+    font-size: 8px;
+  }
+} 

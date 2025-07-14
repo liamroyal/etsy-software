@@ -18,6 +18,14 @@
   padding: 2rem;
 }
 
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+    margin: 0 1rem;
+    width: calc(100% - 2rem);
+  }
+}
+
 .header {
   margin-bottom: 2rem;
   text-align: center;
@@ -82,22 +90,26 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  margin: 0;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin: 0;
 }
 
 .label {
   font-size: 0.875rem;
   font-weight: 600;
   color: #1e293b;
+  margin: 0;
 }
 
 .textareaContainer {
   position: relative;
+  margin: 0;
 }
 
 .textarea {
@@ -110,9 +122,17 @@
   transition: all 0.2s;
   font-family: ui-monospace, monospace;
   font-size: 0.875rem;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   min-height: 120px;
   resize: vertical;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .textarea {
+    padding: 0.875rem 1rem;
+  }
 }
 
 .textarea:focus {

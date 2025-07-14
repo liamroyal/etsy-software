@@ -305,7 +305,7 @@ const UserManagement: React.FC = () => {
                 {currentUser?.id !== user.id && (
                   <>
                     <Button
-                      variant="ghost"
+                      variant="secondary"
                       size="sm"
                       onClick={() => handleEditUser(user.id)}
                     >

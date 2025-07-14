@@ -1,0 +1,289 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background: var(--color-background);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+/* Section Styling */
+.section {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-border);
+}
+
+/* Grid Layouts */
+.metricsGrid,
+.revenueGrid,
+.perOrderGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.ratioGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Metric Card Styling */
+.metricCard {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metricTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.metricValue {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.metricSubtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.trendIcon {
+  font-size: 1.2rem;
+}
+
+/* Trend Colors */
+.up {
+  color: var(--color-success);
+}
+
+.down {
+  color: var(--color-error);
+}
+
+.neutral {
+  color: var(--color-text-secondary);
+}
+
+/* Ratio Cards */
+.ratioCard {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+.ratioTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.ratioValue {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+}
+
+.ratioValue.good {
+  color: var(--color-success);
+}
+
+.ratioValue.average {
+  color: var(--color-warning);
+}
+
+.ratioValue.poor {
+  color: var(--color-error);
+}
+
+.ratioDescription {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Insights Section */
+.insights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.insight {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  border-left: 4px solid var(--color-primary);
+}
+
+.insightIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.insightText {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.insightText strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-md);
+  }
+  
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .section {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .sectionTitle {
+    font-size: 1.2rem;
+  }
+  
+  .metricsGrid,
+  .revenueGrid,
+  .perOrderGrid,
+  .ratioGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .metricCard,
+  .ratioCard {
+    padding: var(--spacing-md);
+  }
+  
+  .metricValue {
+    font-size: 1.5rem;
+  }
+  
+  .ratioValue {
+    font-size: 1.8rem;
+  }
+  
+  .insight {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-sm);
+  }
+  
+  .section {
+    padding: var(--spacing-sm);
+  }
+  
+  .metricValue {
+    font-size: 1.3rem;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .ratioValue {
+    font-size: 1.6rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: var(--color-background-dark);
+  }
+  
+  .section {
+    background: var(--color-surface-dark);
+    border-color: var(--color-border-dark);
+  }
+  
+  .metricCard,
+  .ratioCard,
+  .insight {
+    background: var(--color-background-dark);
+    border-color: var(--color-border-dark);
+  }
+}
+
+/* Animation for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loading {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(
+    to right,
+    var(--color-border) 8%,
+    var(--color-surface) 18%,
+    var(--color-border) 33%
+  );
+  background-size: 800px 104px;
+} 
