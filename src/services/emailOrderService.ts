@@ -288,7 +288,15 @@ export const getFulfilledOrdersForCurrentMonth = (orders: EmailOrder[]): EmailOr
 export const getDaysSinceFulfillment = (updatedAt: any): number => {
   const fulfillmentDate = getOrderDate(updatedAt);
   const now = new Date();
-  const diffTime = now.getTime() - fulfillmentDate.getTime();
+  
+  // Reset both dates to start of day to avoid time-of-day issues
+  const fulfillmentStartOfDay = new Date(fulfillmentDate);
+  fulfillmentStartOfDay.setHours(0, 0, 0, 0);
+  
+  const nowStartOfDay = new Date(now);
+  nowStartOfDay.setHours(0, 0, 0, 0);
+  
+  const diffTime = nowStartOfDay.getTime() - fulfillmentStartOfDay.getTime();
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 };
@@ -307,5 +315,6 @@ export const formatFulfillmentDate = (updatedAt: any): string => {
 export const formatDaysAgoText = (days: number): string => {
   if (days === 0) return 'Today';
   if (days === 1) return '1 day ago';
+  if (days < 0) return 'Today'; // Handle negative days (timezone edge cases)
   return `${days} days ago`;
 }; 
